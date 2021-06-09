@@ -6,6 +6,7 @@ private:
 	int denominator;
 public:
 	Rational(int _numerator = 0, int _denominator = 1);
+	Rational(const Rational& other);
 	~Rational();
 	
 	void Set_numerator(int v_numerator);
@@ -14,7 +15,6 @@ public:
 	int Get_numerator() const;
 	int Get_denominator() const;
 
-	Rational(const Rational& other);
 	Rational operator + (Rational& a);
 	Rational operator - (Rational& a);
 	Rational operator * (Rational& a);

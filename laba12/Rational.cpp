@@ -21,20 +21,23 @@ int NOK(int a, int b) {
 
 Rational::Rational(int _numerator, int _denominator) {
 	if (_denominator < 0) {
-	numerator = -_numerator;
+	numerator = _numerator * (-1);
 	denominator = abs(_denominator);
     }
 	if (_denominator == 0) {
     std::cerr << "Erorr, denominator is 0." << std::endl;
 	exit(-1);
 	}
-	numerator = _numerator;
-	denominator = _denominator;
+	else {
+		numerator = _numerator;
+		denominator = _denominator;
+	}
+	
 }
  Rational::Rational(const Rational& other) {
 	numerator = other.numerator;
 	denominator = other.denominator;
-}
+ }
 
 Rational::~Rational() {}
 
@@ -59,7 +62,7 @@ Rational Rational::operator + (Rational& a) {
 	int nod = 0;
 	res.denominator = NOK(denominator, a.denominator);
 	res.numerator = a.numerator * res.denominator / a.denominator + numerator * res.denominator / denominator;
-	nod = NOD(res.denominator, res.numerator);
+	nod = NOD(res.denominator, abs(res.numerator));
 	if (nod != res.denominator) {
 		res.denominator = res.denominator / nod;
 		res.numerator = res.numerator / nod;
@@ -71,7 +74,7 @@ Rational Rational::operator - (Rational& a) {
 	int nod;
 	res.denominator = NOK(denominator, a.denominator);
 	res.numerator = a.numerator * res.denominator / a.denominator - numerator * res.denominator / denominator;
-	nod = NOD(res.denominator, res.numerator);
+	nod = NOD(res.denominator, abs(res.numerator));
 	if (nod != res.denominator) {
 		res.denominator = res.denominator / nod;
 		res.numerator = res.numerator / nod;
@@ -84,7 +87,7 @@ Rational Rational::operator * (Rational& a) {
 	int nod;
 	res.denominator = denominator * a.denominator;
 	res.numerator = numerator * a.numerator;
-	nod = NOD(res.denominator, res.numerator);
+	nod = NOD(res.denominator, abs(res.numerator));
 	res.denominator = res.denominator / nod;
 	res.numerator = res.numerator / nod;
 	return res;
@@ -94,7 +97,7 @@ Rational Rational::operator / (Rational& a) {
 	int nod;
 	res.denominator = denominator * a.numerator;
 	res.numerator = numerator * a.denominator;
-	nod = NOD(res.denominator, res.numerator);
+	nod = NOD(res.denominator, abs(res.numerator));
 	res.denominator = res.denominator / nod;
 	res.numerator = res.numerator / nod;
 	return res;
@@ -111,7 +114,8 @@ Rational& Rational::operator=(const Rational& other) {
 	return out;
 }
 std::istream& operator >> (std::istream& in, Rational& fraction) {
-	in >> fraction.numerator >> fraction.denominator;
+	char delimiter;
+	in >> fraction.numerator >> delimiter >> fraction.denominator;
 	fraction = Rational(fraction.numerator, fraction.denominator);
 	return in;
 }

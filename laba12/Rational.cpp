@@ -5,10 +5,10 @@
 int NOD(int a, int b) {
 	while (a != 0 && b != 0) {
 		if (a > b) {
-			a %= b;
+			a = a % b;
 		}
 		else {
-			 b %= a;
+			 b = b % a;
 		}
 	}
 	return a + b;

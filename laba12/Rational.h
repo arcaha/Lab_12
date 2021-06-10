@@ -1,3 +1,5 @@
+#ifndef Rational_h
+#define Rational_h
 #include <iostream>
 class Rational
 {
@@ -15,14 +17,18 @@ public:
 	int Get_numerator() const;
 	int Get_denominator() const;
 
-	Rational operator + (Rational& a);
-	Rational operator - (Rational& a);
-	Rational operator * (Rational& a);
-	Rational operator / (Rational& a);
+	Rational operator + (const Rational& a);
+	Rational operator - (const Rational& a);
+	Rational operator * (const Rational& a);
+	Rational operator / (const Rational& a);
 	Rational& operator = (const Rational& other);
+	Rational& operator += (const Rational& a);
+	Rational& operator -= (const Rational& a);
+	Rational& operator *= (const Rational& a);
+	Rational& operator /= (const Rational& a);
 
 	friend std::ostream& operator << (std::ostream& out, const Rational& res);
 	friend std::istream& operator >> (std::istream& in, Rational& fraction);
 };
 
-
+#endif

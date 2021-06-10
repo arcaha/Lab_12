@@ -3,7 +3,8 @@
 
 int main()
 {
-		char operation[2];
+	try {
+		char operation[3];
 		Rational a, b, res;
 		std::cout << "Input first frection: ";
 		std::cin >> a;
@@ -15,5 +16,10 @@ int main()
 		if (operation[0] == '-') res = a - b;
 		if (operation[0] == '*') res = a * b;
 		if (operation[0] == '/') res = a / b;
+		if (operation[0] == '+' && operation[1] == '=');
 		std::cout << "Result: " << res;
+	}
+	catch (const char* Error) {
+		std::cout << Error << std::endl;
+	}
 }

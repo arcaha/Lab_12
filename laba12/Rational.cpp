@@ -25,8 +25,7 @@ Rational::Rational(int _numerator, int _denominator) {
 	denominator = abs(_denominator);
     }
 	if (_denominator == 0) {
-    std::cerr << "Erorr, denominator is 0." << std::endl;
-	exit(-1);
+    throw "Erorr, denominator is 0.";
 	}
 	else {
 		numerator = _numerator;
@@ -57,7 +56,7 @@ int Rational::Get_denominator() const {
 	return denominator;
 }
 
-Rational Rational::operator + (Rational& a) {
+Rational Rational::operator + (const Rational& a) {
 	Rational res;
 	int nod = 0;
 	res.denominator = NOK(denominator, a.denominator);
@@ -69,7 +68,7 @@ Rational Rational::operator + (Rational& a) {
 	}
 	return res;
 }
-Rational Rational::operator - (Rational& a) {
+Rational Rational::operator - (const Rational& a) {
 	Rational res;
 	int nod;
 	res.denominator = NOK(denominator, a.denominator);
@@ -82,7 +81,7 @@ Rational Rational::operator - (Rational& a) {
 	return res;
 }
 
-Rational Rational::operator * (Rational& a) {
+Rational Rational::operator * (const Rational& a) {
 	Rational res;
 	int nod;
 	res.denominator = denominator * a.denominator;
@@ -92,7 +91,7 @@ Rational Rational::operator * (Rational& a) {
 	res.numerator = res.numerator / nod;
 	return res;
 }
-Rational Rational::operator / (Rational& a) {
+Rational Rational::operator / (const Rational& a) {
 	Rational res;
 	int nod;
 	res.denominator = denominator * a.numerator;
@@ -105,6 +104,22 @@ Rational Rational::operator / (Rational& a) {
 Rational& Rational::operator=(const Rational& other) {
 	numerator = other.numerator;
 	denominator = other.denominator;
+	return *this;
+}
+Rational& Rational::operator += (const Rational& a) {
+	*this = *this + a;
+	return *this;
+}
+Rational& Rational::operator -= (const Rational& a) {
+	*this = *this - a;
+	return *this; 
+}
+Rational& Rational::operator *= (const Rational& a) {
+	*this = *this * a;
+	return *this; 
+}
+Rational& Rational::operator /= (const Rational& a) {
+	*this = *this / a;
 	return *this;
 }
 
